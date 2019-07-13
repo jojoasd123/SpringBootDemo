@@ -1,6 +1,9 @@
 package hello.demo.model;
 
+
+
 import java.time.format.DateTimeFormatter;
+
 
 public class User {
     private Integer id;
@@ -9,6 +12,7 @@ public class User {
     private String token;
     private Long gmtCreate;
     private Long gmtModified;
+
 
     public Integer getId() {
         return id;
@@ -57,4 +61,5 @@ public class User {
     public void setGmtModified(Long gmtModified) {
         this.gmtModified = gmtModified;
     }
+
 }

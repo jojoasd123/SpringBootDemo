@@ -1,9 +1,16 @@
 package hello.demo.dto;
 
+
+
+
 public class GithubUser {
     private String name;
     private Long id;
     private String bio;
+
+
+
+    private String avatar_url;
 
     public String getName() {
         return name;
@@ -28,4 +35,6 @@ public class GithubUser {
     public void setBio(String bio) {
         this.bio = bio;
     }
+
+
 }
