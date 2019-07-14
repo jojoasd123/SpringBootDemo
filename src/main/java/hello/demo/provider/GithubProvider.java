@@ -23,7 +23,7 @@ public class GithubProvider {
             String string = response.body().string();
             String token =string.split("&")[0].split("=")[1];
             System.out.println("this is token::"+token);
-            return string;
+            return token;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,10 +34,15 @@ public class GithubProvider {
         Request request = new Request.Builder()
                 .url("https://api.github.com/user?access_token="+accessToken)
                 .build();
-        try (Response response = client.newCall(request).execute()) {
+        try {
+            Response response = client.newCall(request).execute();
             String string = response.body().string();
+            System.out.println("blow is website");
+            System.out.println("https://api.github.com/user?access_token="+accessToken);
+            System.out.println("this is return string"+string);
             GithubUser githubUser = JSON.parseObject(string,
                     GithubUser.class);
+            System.out.println(githubUser);
             return githubUser;
         } catch (IOException e) {
             e.printStackTrace();
