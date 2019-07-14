@@ -87,7 +87,7 @@
                 </div>
                 <div class="form-group">
                     <label for="title">添加标签:</label>
-                    <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag"
+                    <input type="text" class="form-control" th:text="${tag}" id="tag" name="tag"
                            placeholder="输入标签,以,号隔开">
                 </div>
                 <div class="alert alert-danger col-lg-12 col-md-12 col-sm-12 col-xs-12" role="alert" th:value="${error}"

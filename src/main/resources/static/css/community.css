@@ -13,5 +13,17 @@ body{
 
 .container-fluid {
     width: 95%;
+}
 
+.media-object{
+    width:100px;
+    height:100px;
+}
+.media-body {
+    padding-top: 10px;
+}
+.text-dec{
+    font-size:12px;
+    font-weight:normal;
+    color:#999;
 }
