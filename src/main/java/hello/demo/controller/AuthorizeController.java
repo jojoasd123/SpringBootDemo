@@ -30,6 +30,7 @@ public class AuthorizeController {
     private String redirect_url;
     @Value("${github.client.secret}")
     private String clientSecret;
+
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
@@ -46,8 +47,7 @@ public class AuthorizeController {
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GithubUser githubUser = githubProvider.getUser(accessToken);
         System.out.println(githubUser.getName());
-        if (githubUser!=null)
-        {
+        if (githubUser != null) {
             User user = new User();
             userMapper.insert(user);
             String token = UUID.randomUUID().toString();
@@ -63,9 +63,7 @@ public class AuthorizeController {
             response.addCookie(cookie);
 
             return "redirect:/";
-        }
-        else
-        {
+        } else {
             //登陆失败,重新登陆
             return "redirect:/";
         }

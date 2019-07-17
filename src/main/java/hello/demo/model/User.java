@@ -1,7 +1,6 @@
 package hello.demo.model;
 
 
-
 import lombok.Data;
 
 import java.time.format.DateTimeFormatter;
@@ -15,7 +14,6 @@ public class User {
     private Long gmtCreate;
     private Long gmtModified;
     private String avatarUrl;
-
 
 
 }
