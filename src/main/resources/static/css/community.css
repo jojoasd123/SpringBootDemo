@@ -16,8 +16,8 @@ body{
 }
 
 .media-object{
-    width:100px;
-    height:100px;
+    width: 50px;
+    height:50px;
 }
 .media-body {
     padding-top: 10px;
@@ -30,4 +30,9 @@ body{
 
 .profile .section{
     margin-top: 15px;
+}
+
+.community-menu{
+    color:#999;
+    font-size:13px;
 }
