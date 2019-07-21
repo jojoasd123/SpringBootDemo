@@ -5,6 +5,7 @@ import hello.demo.dto.GithubUser;
 import hello.demo.mapper.UserMapper;
 import hello.demo.model.User;
 import hello.demo.provider.GithubProvider;
+import hello.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,8 @@ public class AuthorizeController {
     private String redirect_url;
     @Value("${github.client.secret}")
     private String clientSecret;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code") String code,
@@ -49,7 +52,6 @@ public class AuthorizeController {
         System.out.println(githubUser.getName());
         if (githubUser != null) {
             User user = new User();
-            userMapper.insert(user);
             String token = UUID.randomUUID().toString();
             user.setToken(token);
             user.setName(githubUser.getName());
@@ -57,7 +59,8 @@ public class AuthorizeController {
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             user.setAvatarUrl(githubUser.getAvatar_url());
-            userMapper.insert(user);
+
+            userService.CreateOrUpdate(user);
 
             Cookie cookie = new Cookie("token", token);
             response.addCookie(cookie);
@@ -67,8 +70,16 @@ public class AuthorizeController {
             //登陆失败,重新登陆
             return "redirect:/";
         }
+    }
 
-
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,
+                         HttpServletResponse response){
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 }
 
