@@ -2,6 +2,8 @@ package hello.demo.service;
 
 import hello.demo.dto.PaginationDTO;
 import hello.demo.dto.QuestionDTO;
+import hello.demo.exception.CustomizeErrorCode;
+import hello.demo.exception.CustomizeException;
 import hello.demo.mapper.QuestionMapper;
 import hello.demo.mapper.UserMapper;
 import hello.demo.model.Question;
@@ -26,7 +28,7 @@ public class QuestionService {
 
     public PaginationDTO list(Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
-        Integer totalCount =(int) questionMapper.countByExample(new QuestionExample());
+        Integer totalCount = (int) questionMapper.countByExample(new QuestionExample());
         Integer offset = size * (page - 1);
 
 
@@ -60,7 +62,7 @@ public class QuestionService {
 
         QuestionExample questionExample = new QuestionExample();
         questionExample.createCriteria().andCreatorEqualTo(userId);
-        Integer totalCount =(int) questionMapper.countByExample(questionExample);
+        Integer totalCount = (int) questionMapper.countByExample(questionExample);
         Integer offset = size * (page - 1);
 
 
@@ -101,12 +103,12 @@ public class QuestionService {
     }
 
     public void createOrUpdate(Question question) {
-        if (question.getId() ==null){
+        if (question.getId() == null) {
             //创建
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
             questionMapper.insert(question);
-        }else{
+        } else {
             //更新
             question.setGmtModified(question.getGmtCreate());
             Question updateQuestion = new Question();
@@ -115,7 +117,10 @@ public class QuestionService {
             updateQuestion.setTag(question.getTag());
             QuestionExample example = new QuestionExample();
             example.createCriteria().andIdEqualTo(question.getId());
-            questionMapper.updateByExampleSelective(updateQuestion, example);
+            int updated = questionMapper.updateByExampleSelective(updateQuestion, example);
+            if(updated!=1){
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
     }
 }
