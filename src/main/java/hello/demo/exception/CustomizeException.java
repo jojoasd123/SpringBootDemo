@@ -14,7 +14,7 @@ public class CustomizeException extends RuntimeException{
         return message;
     }
 
-    public Integer getcode(){
+    public Integer getCode(){
         return code;
     }
 
