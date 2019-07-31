@@ -1,8 +1,8 @@
 package hello.demo.controller;
 
-import hello.demo.dto.CommentCreateDTO;
 import hello.demo.dto.CommentDTO;
 import hello.demo.dto.QuestionDTO;
+import hello.demo.enums.CommentTypeEnum;
 import hello.demo.mapper.QuestionExtMapper;
 import hello.demo.service.CommentService;
 import hello.demo.service.QuestionService;
@@ -31,7 +31,7 @@ public class QuestionController {
                            Model model){
         QuestionDTO questionDTO = questionService.getById(id);
 
-        List<CommentDTO> comments =  commentService.listByQuestionId(id);
+        List<CommentDTO> comments =  commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
 
         //累加阅读数
         questionService.incView(id);

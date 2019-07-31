@@ -32,15 +32,15 @@
     -->
     update question
     set view_count =view_count + #{viewCount,jdbcType=INTEGER}
-    where id = #{id,jdbcType=Long}
+    where id = #{id}
   </update>
-  <update id="incView" parameterType="hello.demo.model.Question">
+  <update id="incCommentCount" parameterType="hello.demo.model.Question">
     <!--
       This is for add the view number of the question.
     -->
     update question
     set comment_count =comment_count + #{commentCount,jdbcType=INTEGER}
-    where id = #{id,jdbcType=Long}
+    where id = #{id}
   </update>
 
 </mapper>
