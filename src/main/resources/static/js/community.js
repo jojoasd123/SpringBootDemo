@@ -93,7 +93,7 @@ function comment2target(targetId,type,content)
     $.ajax({
         type: "POST",
         url: "/comment",
-        contentType:"json",
+        contentType:"application/json",
         data: JSON.stringify({"parentId":targetId,
             "content":content,
             "type":type

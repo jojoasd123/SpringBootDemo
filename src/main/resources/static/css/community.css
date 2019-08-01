@@ -21,8 +21,21 @@ body{
 }
 .media-body {
     padding-top: 10px;
+    margin-left: 15px;
+    color:#337ab7;
 }
-.text-dec{
+.media-heading {
+    color:#337ab7;
+    font-size: 18px;
+}
+.media{
+    margin-top: 15px;
+}
+.media-heading.title_q{
+    color:#337ab7;
+}
+
+.text-desc{
     font-size:12px;
     font-weight:normal;
     color:#999;
@@ -49,6 +62,7 @@ body{
 .btn-comment{
     float:right;
     margin-bottom:10px;
+    margin-top: 10px;
 }
 .comment-sp{
     margin-top:0;
@@ -59,6 +73,7 @@ body{
 .menu.icon{
     margin-right:6px;
     font-size:15px;
+    cursor: pointer;
 }
 
 .menu.active{
@@ -70,13 +85,16 @@ body{
 }
 
 .comments{
+    padding-bottom: 5px;
     margin-bottom: 15px;
     border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
+
+
 }
 
 .question-title{
     margin-top: 25px;
+    font-size: 18px;
 }
 
 .sub-comments{
@@ -89,4 +107,8 @@ body{
 
 .sub-comments .btn{
     margin: 10px 0;
+}
+
+h4{
+    font-size: 18px;
 }
