@@ -7,8 +7,6 @@ function post(){
 
     comment2target(questionId,1,content);
 
-    console.log(questionId);
-    console.log(content);
 }
 
 //展开二级评论
