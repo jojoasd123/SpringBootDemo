@@ -18,16 +18,18 @@ function collapseComments(e) {
     var collapse = e.getAttribute("data-collapse");
     if (collapse) {
         // 折叠二级评论
-        comments.removeClass("in");
+        comments.removeClass("show");
         e.removeAttribute("data-collapse");
         e.classList.remove("active");
     } else {
+
         var subCommentContainer = $("#comment-" + id);
         if (subCommentContainer.children().length != 1) {
+
             //展开二级评论
-            comments.addClass("in");
+            comments.addClass("show");
             // 标记二级评论展开状态
-            e.setAttribute("data-collapse", "in");
+            e.setAttribute("data-collapse", "show");
             e.classList.add("active");
         } else {
             $.getJSON("/comment/" + id, function (data) {
@@ -64,9 +66,9 @@ function collapseComments(e) {
                     subCommentContainer.prepend(commentElement);
                 });
                 //展开二级评论
-                comments.addClass("in");
+                comments.addClass("show");
                 // 标记二级评论展开状态
-                e.setAttribute("data-collapse", "in");
+                e.setAttribute("data-collapse", "show");
                 e.classList.add("active");
             });
         }

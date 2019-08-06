@@ -112,3 +112,15 @@ body{
 h4{
     font-size: 18px;
 }
+
+/*.menu.span.icon-inner.active{*/
+/*    color:#499ef3;*/
+/*}*/
+
+/*.menu.icon.icon-inner:hover{*/
+/*    color:#499ef3;*/
+/*}*/
+
+span .active {
+    color: #499ef3;
+}
