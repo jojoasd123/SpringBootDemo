@@ -15,6 +15,7 @@
         <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified"/>
         <result column="like_count" jdbcType="BIGINT" property="likeCount"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="comment_count" jdbcType="BIGINT" property="commentCount"/>
     </resultMap>
 
     <update id="incCommentCount" parameterType="hello.demo.model.Comment">
