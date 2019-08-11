@@ -10,13 +10,16 @@ import hello.demo.mapper.UserMapper;
 import hello.demo.model.Question;
 import hello.demo.model.QuestionExample;
 import hello.demo.model.User;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
@@ -44,7 +47,9 @@ public class QuestionService {
             page = paginationDTO.getTotalPage();
         }
 
-        List<Question> questions = questionMapper.selectByExampleWithRowbounds(new QuestionExample(), new RowBounds(offset, size));
+        QuestionExample questionExample = new QuestionExample();
+        questionExample.setOrderByClause("gmt_create desc");
+        List<Question> questions = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offset, size));
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
         for (Question question : questions) {
@@ -136,5 +141,26 @@ public class QuestionService {
         question.setViewCount(1);
         questionExtMapper.incView(question);
 
+    }
+
+    public List<QuestionDTO> selectRelated(QuestionDTO questionDTO) {
+        if (StringUtils.isBlank(questionDTO.getTag())) {
+            return new ArrayList<>();
+        }
+        String[] tag = StringUtils.split(questionDTO.getTag(), ",");
+        String regexTag = StringUtils.replace(questionDTO.getTag(),
+                ",", "|");
+
+        Question question = new Question();
+        question.setId(questionDTO.getId());
+        question.setTag(regexTag);
+
+        List<Question> questions = questionExtMapper.selectRelated(question);
+        List<QuestionDTO> questionDTOS = questions.stream().map(q -> {
+            QuestionDTO questionDTO1 = new QuestionDTO();
+            BeanUtils.copyProperties(q, questionDTO1);
+            return questionDTO1;
+        }).collect(Collectors.toList());
+        return questionDTOS;
     }
 }

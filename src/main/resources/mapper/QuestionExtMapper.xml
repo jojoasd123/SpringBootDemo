@@ -43,4 +43,12 @@
     where id = #{id}
   </update>
 
+  <select id="selectRelated" parameterType="hello.demo.model.Question" resultMap="BaseResultMap">
+
+    select
+    *
+    from question
+    where id != #{id,jdbcType=BIGINT} and tag regexp #{tag}
+  </select>
+
 </mapper>
