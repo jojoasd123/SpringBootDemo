@@ -8,7 +8,8 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
     <script th:href="@{/webjars/jquery/3.4.1/jquery.min.js} "></script>
     <link rel="stylesheet" href="/css/community.css">
-
+    <script src="https://unpkg.com/ionicons@4.2.2/dist/ionicons.js"></script>
+    <script src="/js/community.js" type="application/javascript"></script>
     <!--
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     -->
@@ -38,18 +39,80 @@
                 <div class="form-group">
                     <label for="title">问题标题 (简单扼要)</label>
                     <input type="text" class="form-control" id="title" th:value="${title}" name="title"
+                           autocomplete="off"
                            placeholder="问题标题...">
                 </div>
                 <div class="form-group">
                     <label for="title">问题补充 (必填,请参照右侧提示)</label>
                     <textarea name="description" id="description" th:value="${description}" class="form-control"
+                              autocomplete="off"
                               cols="30" rows="10"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="title">添加标签:</label>
                     <input type="text" class="form-control" th:text="${tag}" id="tag" name="tag"
+                           autocomplete="off"
                            placeholder="输入标签,以,号隔开">
+
+                    <div id="select-tag" class="publish-tag-tab">
+
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item" th:each="selectCategory:${tags}"
+
+                            >
+                                <a class="nav-link" id="pills-home-tab" data-toggle="pill"
+                                   th:classappend="${selectCategoryStat.first ? 'active show':''}"
+                                   th:href="${'#'+selectCategory.categoryName}" role="tab" aria-controls="pills-home"
+                                   aria-selected="false"
+
+                                   th:text="${selectCategory.categoryName}">Home</a>
+                            </li>
+
+                        </ul>
+                        <!--                        <div class="tab-content" id="pills-home">-->
+                        <!--                            <div class="tab-pane fade "-->
+                        <!--                                 th:each="selectCategory: ${tags}"-->
+
+                        <!--                                 th:id="${selectCategory.categoryName}"-->
+                        <!--                                 th:classappend="${selectCategoryStat.first ? 'active show':''}"-->
+                        <!--                                 role="tabpanel" aria-labelledby="pills-home-tab">-->
+                        <!--                                <span class="badge badge-info question-tag"-->
+                        <!--                                      th:each="selectTag:${selectCategory.tags}"-->
+                        <!--                                      >-->
+                        <!--                                    <ion-icon name="pricetags"></ion-icon>-->
+                        <!--                                    <span class="badge badge-info"-->
+
+                        <!--                                          th:text="${' '+selectTag}"-->
+                        <!--                                          th:data-tag="${selectTag}">-->
+                        <!--                                    </span>-->
+                        <!--                                </span>-->
+
+                        <!--                            </div>-->
+
+                        <!--                        </div>-->
+
+                    </div>
+
+
+                    <!--                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">-->
+                    <!--                        <li class="nav-item">-->
+                    <!--                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>-->
+                    <!--                        </li>-->
+                    <!--                        <li class="nav-item">-->
+                    <!--                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>-->
+                    <!--                        </li>-->
+                    <!--                        <li class="nav-item">-->
+                    <!--                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>-->
+                    <!--                        </li>-->
+                    <!--                    </ul>-->
+                    <!--                    <div class="tab-content" id="pills-tabContent">-->
+                    <!--                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">111</div>-->
+                    <!--                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">222</div>-->
+                    <!--                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">333</div>-->
+                    <!--                    </div>-->
+
                 </div>
+
                 <div class="alert alert-danger col-lg-12 col-md-12 col-sm-12 col-xs-12" role="alert" th:value="${error}"
                      th:if="${error!=null}">用户未登录
                 </div>
@@ -60,6 +123,8 @@
 
             </form>
         </div>
+
+
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <h3>问题发起指南</h3>
             <p>问题标题:请用精简的语言描述您发布的问题,不超过25字</p>
@@ -68,4 +133,21 @@
         </div>
     </div>
 </div>
+
+<!--<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">-->
+<!--    <li class="nav-item">-->
+<!--        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>-->
+<!--    </li>-->
+<!--    <li class="nav-item">-->
+<!--        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>-->
+<!--    </li>-->
+<!--    <li class="nav-item">-->
+<!--        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>-->
+<!--    </li>-->
+<!--</ul>-->
+<!--<div class="tab-content" id="pills-tabContent">-->
+<!--    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">111</div>-->
+<!--    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">222</div>-->
+<!--    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">333</div>-->
+<!--</div>-->
 </html>
