@@ -3,6 +3,7 @@ package hello.demo.controller;
 import hello.demo.dto.PaginationDTO;
 import hello.demo.mapper.UserMapper;
 import hello.demo.model.User;
+import hello.demo.service.NotificationService;
 import hello.demo.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,12 +20,13 @@ public class ProfileController {
     private UserMapper userMapper;
     @Autowired
     private QuestionService questionService;
-
+    @Autowired
+    private NotificationService notificationService;
 
     @GetMapping("/profile/{action}")
     public String profile(@PathVariable(name="action") String action,
                           @RequestParam(name ="page",defaultValue="1") Integer page,
-                          @RequestParam(name ="size",defaultValue="2") Integer size,
+                          @RequestParam(name = "size", defaultValue = "5") Integer size,
                           Model model,
                           HttpServletRequest request){
 
@@ -37,15 +39,19 @@ public class ProfileController {
         {
             model.addAttribute("section","questions");
             model.addAttribute("sectionName","我的问题");
+            PaginationDTO paginationDTO = questionService.list(user.getId(), page, size);
+            model.addAttribute("pagination", paginationDTO);
         }
         else if("replies".equals(action)){
+            PaginationDTO paginationDTO = notificationService.list(user.getId(), page, size);
+            Long unreadCount = notificationService.unreadCount(user.getId());
             model.addAttribute("section","replies");
             model.addAttribute("sectionName","最新回复");
+            model.addAttribute("pagination", paginationDTO);
+
         }
 
-        PaginationDTO paginationDTO = questionService.list(user.getId(), page, size);
 
-        model.addAttribute("pagination",paginationDTO);
         return "profile";
     }
 }

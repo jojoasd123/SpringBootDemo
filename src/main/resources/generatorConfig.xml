@@ -34,5 +34,6 @@
         <table schema="community_demo" tableName="user" domainObjectName="User" ></table>
         <table schema="community_demo" tableName="question" domainObjectName="Question" ></table>
         <table schema="community_demo" tableName="comment" domainObjectName="Comment" ></table>
+        <table schema="community_demo" tableName="notification" domainObjectName="Notification"></table>
     </context>
 </generatorConfiguration>

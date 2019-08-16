@@ -77,6 +77,7 @@ body{
 
 .menu.active{
     color:#499ef3;
+
 }
 
 .menu.icon:hover{
@@ -87,7 +88,6 @@ body{
     padding-bottom: 5px;
     margin-bottom: 15px;
     border-bottom: 1px solid #eee;
-
 
 }
 
@@ -139,4 +139,19 @@ h4{
 
 span .active {
     color: #499ef3;
+}
+
+/*.list-group-item {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    width: 100%;*/
+/*}*/
+
+.list-group-item.active {
+    background-color: #5e8fbf;
+    border-color: #f8f9fa;
+}
+
+.list-group-item {
+    color: #212529;
 }
