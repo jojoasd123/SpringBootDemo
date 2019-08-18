@@ -147,11 +147,11 @@ span .active {
 /*    width: 100%;*/
 /*}*/
 
-.list-group-item.active {
-    background-color: #5e8fbf;
-    border-color: #f8f9fa;
-}
+/*.list-group-item.active {*/
+/*    background-color: #5e8fbf;*/
+/*    border-color: #f8f9fa;*/
+/*}*/
 
-.list-group-item {
-    color: #212529;
-}
+/*.list-group-item {*/
+/*    color: #212529;*/
+/*}*/

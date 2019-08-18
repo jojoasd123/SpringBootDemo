@@ -82,19 +82,15 @@
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <div class="list-group section">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <a href="/profile/questions"
-                           th:class="${section == 'questions'}? 'active list-group-item' : 'list-group-item'">我的问题</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="/profile/replies"
-                           th:class="${section == 'replies'}? 'active list-group-item' : 'list-group-item'">
-                            最新回复
-                            <span class="badge badge-pill badge-light" th:text="${session.unreadCount}"></span>
-                        </a>
-                    </li>
-                </ul>
+
+
+                <a class="list-group-item list-group-item-action list-group-item-light" href="/profile/questions"
+                   th:classappend="${section=='questions'? 'active':''}">我的问题</a>
+
+
+                <a class="list-group-item list-group-item-action list-group-item-light" href="/profile/replies"
+                   th:classappend="${section=='replies'? 'active':''}">最新回复
+                    <span class="badge badge-pill badge-light" th:text="${session.unreadCount}"></span></a>
 
 
             </div>
