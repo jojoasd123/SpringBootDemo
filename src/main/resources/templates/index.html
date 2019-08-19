@@ -16,7 +16,7 @@
 <script type="application/javascript">
     window.onload=function(){
         window.localStorage.getItem("closable");
-        if(closable==true){
+        if (closable == true) {
             window.close();
             window.localStorage.removeItem("closable");
         }
@@ -56,14 +56,35 @@
     </div>
 </div>
 <div class="container">
-    <ul class="pagination">
-        <li class="page-item" th:if="${pagination.showFirstPage}"><a class="page-link" href="/?page=1">&lt;&lt;</a></li>
-        <li class="page-item" th:if="${pagination.showPrevious}"><a class="page-link" th:href="@{/(page=${pagination.page -1})}">&lt;</a></li>
+    <ul class="pagination" th:if="${search}">
+        <li class="page-item" th:if="${pagination.showFirstPage}"><a class="page-link"
+                                                                     th:href="@{/(page=1,search=${search})}">&lt;&lt;</a>
+        </li>
+        <li class="page-item" th:if="${pagination.showPrevious}"><a class="page-link"
+                                                                    th:href="@{/(page=${pagination.page -1},search=${search})}">&lt;</a>
+        </li>
         <li class="page-item" th:each="page:${pagination.pages}" th:classappend="${pagination.page ==page}?'active':''">
+            <a class="page-link" th:href="@{/(page=${page},search=${search})}" th:text="${page}"></a></li>
+        <li class="page-item" th:if="${pagination.showNext}"><a class="page-link"
+                                                                th:href="@{/(page=${pagination.page +1},search=${search})}">&gt;</a>
+        </li>
+        <li class="page-item" th:if="${pagination.showEndPage}"><a class="page-link"
+                                                                   th:href="@{/(page=${pagination.totalPage},search=${search})}">&gt;&gt;</a>
+        </li>
+    </ul>
+    <ul class="pagination" th:if="${search==null}">
+        <li class="page-item" th:if="${pagination.showFirstPage}"><a class="page-link"
+                                                                     th:href="@{/(page=1)}">&lt;&lt;</a></li>
+        <li class="page-item" th:if="${pagination.showPrevious}"><a class="page-link"
+                                                                    th:href="@{/(page=${pagination.page -1})}">&lt;</a>
+        </li>
+        <li class="page-item" th:classappend="${pagination.page ==page}?'active':''" th:each="page:${pagination.pages}">
             <a class="page-link" th:href="@{/(page=${page})}" th:text="${page}"></a></li>
-
-        <li class="page-item" th:if="${pagination.showNext}"><a class="page-link"th:href="@{/(page=${pagination.page +1})}">&gt;</a></li>
-        <li class="page-item" th:if="${pagination.showEndPage}"><a class="page-link" th:href="@{/(page=${pagination.totalPage})}">&gt;&gt;</a></li>
+        <li class="page-item" th:if="${pagination.showNext}"><a class="page-link"
+                                                                th:href="@{/(page=${pagination.page +1})}">&gt;</a></li>
+        <li class="page-item" th:if="${pagination.showEndPage}"><a class="page-link"
+                                                                   th:href="@{/(page=${pagination.totalPage})}">&gt;&gt;</a>
+        </li>
     </ul>
 </div>
 <!--
