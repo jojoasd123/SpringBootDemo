@@ -141,6 +141,10 @@ span .active {
     color: #499ef3;
 }
 
+.footer {
+    padding: 10px 25%;
+    color: #666;
+}
 /*.list-group-item {*/
 /*    display: flex;*/
 /*    justify-content: space-between;*/
