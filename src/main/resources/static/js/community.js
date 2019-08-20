@@ -115,7 +115,11 @@ function collapseComments(e) {
 }
 
 function showSelectTag() {
-    $("#select-tag").show();
+    // $("#pills-tab").show();
+    // $("#pills-home").show();
+
+    $("#selected-tag").show();
+    $("#selected-tag-catagory").show();
 }
 
 function selectTag(e) {
