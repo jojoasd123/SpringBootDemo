@@ -121,11 +121,25 @@ function showSelectTag() {
 function selectTag(e) {
     var value = e.getAttribute("data-tag");
     var previous = $("#tag").val();
+
+    //if tag not in input box,add it to the box
     if (previous.indexOf(value) == -1) {
         if (previous) {
             $("#tag").val(previous + ',' + value);
         } else {
             $("#tag").val(value);
         }
+    }
+    //if tag in input box,remove it.
+    else {
+        //if tag is the first one
+        if (previous.indexOf(value) == 0)
+        //if tag is the only one select tag.
+            if (previous == value)
+                previous = previous.replace(value, "");
+        previous = previous.replace(value + ",", "");
+        previous = previous.replace("," + value, "");
+        $("#tag").val(previous)
+
     }
 }

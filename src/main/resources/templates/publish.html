@@ -92,6 +92,7 @@
                             </li>
 
                         </ul>
+                    <!--选择标签-->
                     <div class="tab-content" id="pills-home">
                         <div class="tab-pane fade "
                              th:each="selectCategory: ${tags}"
@@ -103,7 +104,7 @@
                                       th:each="selectTag:${selectCategory.tags}"
                                 >
                                     <ion-icon name="pricetags"></ion-icon>
-                                    <span class="badge badge-info"
+                                    <span class="badge badge-info" onclick="selectTag(this)"
 
                                           th:text="${' '+selectTag}"
                                           th:data-tag="${selectTag}">

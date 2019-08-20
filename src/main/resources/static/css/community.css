@@ -145,6 +145,11 @@ span .active {
     padding: 10px 25%;
     color: #666;
 }
+
+.nav-searchBar {
+    padding-right: 30px
+}
+
 /*.list-group-item {*/
 /*    display: flex;*/
 /*    justify-content: space-between;*/
