@@ -17,7 +17,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,7 +46,7 @@ public class QuestionService {
         questionQueryDTO.setSearch(search);
 
         Integer totalCount = questionExtMapper.countBySearch(questionQueryDTO);
-        Integer offset = size * (page - 1);
+        Integer offset = page < 1 ? 0 : size * (page - 1);
 
 
         paginationDTO.setPagination(totalCount, page, size);
