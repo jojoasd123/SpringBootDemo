@@ -1,5 +1,6 @@
 cd ~/App/SpringBootDemo/
-git fetch --caller git reset --hard origin/master
+git fetch --all
+git reset --hard origin/master
 git pull
 mvn clean compile -DskipTests package
 pid=$(ps aux | grep "demo" | grep -v grep | awk'{print $2}')
