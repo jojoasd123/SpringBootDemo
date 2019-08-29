@@ -37,3 +37,11 @@ HELP.md
 *.wrapper
 ###log###
 logs
+.mvn/wrapper/maven-wrapper.jar
+*.jar
+.mvn/wrapper/maven-wrapper.properties
+.mvn/wrapper/MavenWrapperDownloader.java
+community.log
+mvnw
+~
+logs/community.log
