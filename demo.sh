@@ -1,7 +1,7 @@
 cd ~/App/SpringBootDemo/
 git pull
 mvn clean compile -DskipTests package
-pid=$(ps aux | grep "community" | grep -v grep | awk'{print $2}')
+pid=$(ps aux | grep "demo" | grep -v grep | awk'{print $2}')
 echo "kill -9 $pid"
 kill -9 $pid
 STATUS=$?
